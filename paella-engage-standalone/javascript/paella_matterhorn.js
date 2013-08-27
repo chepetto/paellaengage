@@ -298,19 +298,19 @@ paella.matterhorn.AccessControl = Class.create(paella.AccessControl,{
 });
 
 paella.matterhorn.VideoLoader = Class.create(paella.VideoLoader,{
-	loadVideo:function(videoId,onSuccess) {
-		var matterhornData = new paella.matterhorn.MatterhornData(paella.player.config);
-		var thisClass = this;
-		matterhornData.loadVideoData(videoId,function(videoData) {
-			thisClass.loadStatus = true;
-			thisClass.frameList = videoData.frames;
-			thisClass.streams.push(videoData.master);
-			if (videoData.slave) {
-				thisClass.streams.push(videoData.slave);
-			}			
-			onSuccess();
-		});	
-	}
+    loadVideo:function(videoId,onSuccess) {
+        var matterhornData = new paella.matterhorn.MatterhornData(paella.player.config);
+        var thisClass = this;
+        matterhornData.loadVideoData(videoId,function(videoData) {
+            thisClass.loadStatus = true;
+            thisClass.frameList = videoData.frames;
+            thisClass.streams.push(videoData.master);
+            if (videoData.slave) {
+                thisClass.streams.push(videoData.slave);
+            }
+            onSuccess();
+        });
+    }
 });
 
 

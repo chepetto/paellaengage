@@ -58,7 +58,199 @@
 				
 				initPaellaExtended({initDelegate:initDelegate});
 			}
-		</script>
+
+            // bypass necessity of downloading xml
+            paella.matterhorn.VideoLoader = Class.create(paella.VideoLoader,{
+                loadVideo:function(videoId,onSuccess) {
+
+                    var videoData = {
+                        "master":{
+                            "sources":{
+                                "mp4":{
+                                    "src":"http://mhdistribution01.ethz.ch/oaipmh-mmp/eff96b7a-7f98-498c-86eb-08f4479e97c6/c070eb9a-df0f-4013-b02c-13ee44a4218c/track_1.mp4",
+                                    "type":"video/mp4"
+                                }
+                            }
+                        },
+                        "slave":{
+                            "sources":{
+                                "mp4":{
+                                    "src":"http://mhdistribution01.ethz.ch/oaipmh-mmp/eff96b7a-7f98-498c-86eb-08f4479e97c6/c070eb9a-df0f-4013-b02c-13ee44a4218c/track_1.mp4",
+                                    "type":"video/mp4"
+                                }
+                            }
+                        },
+                        "frames":{
+                            "0":{
+                                "time":0,
+                                "url":"test/sequences/sequence.0.jpg",
+                                "mimetype":"image/jpeg",
+                                "id":"attachment-1"
+                            },
+                            "39":{
+                                "time":39,
+                                "url":"test/sequences/sequence.39.jpg",
+                                "mimetype":"image/jpeg",
+                                "id":"attachment-2"
+                            },
+                            "55":{
+                                "time":55,
+                                "url":"test/sequences/sequence.55.jpg",
+                                "mimetype":"image/jpeg",
+                                "id":"attachment-3"
+                            },
+                            "78":{
+                                "time":78,
+                                "url":"test/sequences/sequence.78.jpg",
+                                "mimetype":"image/jpeg",
+                                "id":"attachment-4"
+                            },
+                            "97":{
+                                "time":97,
+                                "url":"test/sequences/sequence.97.jpg",
+                                "mimetype":"image/jpeg",
+                                "id":"attachment-5"
+                            },
+                            "110":{
+                                "time":110,
+                                "url":"test/sequences/sequence.110.jpg",
+                                "mimetype":"image/jpeg",
+                                "id":"attachment-6"
+                            },
+                            "176":{
+                                "time":176,
+                                "url":"test/sequences/sequence.176.jpg",
+                                "mimetype":"image/jpeg",
+                                "id":"attachment-7"
+                            },
+                            "235":{
+                                "time":235,
+                                "url":"test/sequences/sequence.235.jpg",
+                                "mimetype":"image/jpeg",
+                                "id":"attachment-8"
+                            },
+                            "306":{
+                                "time":306,
+                                "url":"test/sequences/sequence.306.jpg",
+                                "mimetype":"image/jpeg",
+                                "id":"attachment-9"
+                            },
+                            "345":{
+                                "time":345,
+                                "url":"test/sequences/sequence.345.jpg",
+                                "mimetype":"image/jpeg",
+                                "id":"attachment-10"
+                            },
+                            "364":{
+                                "time":364,
+                                "url":"test/sequences/sequence.364.jpg",
+                                "mimetype":"image/jpeg",
+                                "id":"attachment-11"
+                            },
+                            "383":{
+                                "time":383,
+                                "url":"test/sequences/sequence.383.jpg",
+                                "mimetype":"image/jpeg",
+                                "id":"attachment-12"
+                            },
+                            "412":{
+                                "time":412,
+                                "url":"test/sequences/sequence.412.jpg",
+                                "mimetype":"image/jpeg",
+                                "id":"attachment-13"
+                            },
+                            "450":{
+                                "time":450,
+                                "url":"test/sequences/sequence.450.jpg",
+                                "mimetype":"image/jpeg",
+                                "id":"attachment-14"
+                            },
+                            "484":{
+                                "time":484,
+                                "url":"test/sequences/sequence.484.jpg",
+                                "mimetype":"image/jpeg",
+                                "id":"attachment-15"
+                            },
+                            "491":{
+                                "time":491,
+                                "url":"test/sequences/sequence.491.jpg",
+                                "mimetype":"image/jpeg",
+                                "id":"attachment-16"
+                            },
+                            "526":{
+                                "time":526,
+                                "url":"test/sequences/sequence.526.jpg",
+                                "mimetype":"image/jpeg",
+                                "id":"attachment-17"
+                            },
+                            "536":{
+                                "time":536,
+                                "url":"test/sequences/sequence.536.jpg",
+                                "mimetype":"image/jpeg",
+                                "id":"attachment-18"
+                            },
+                            "543":{
+                                "time":543,
+                                "url":"test/sequences/sequence.543.jpg",
+                                "mimetype":"image/jpeg",
+                                "id":"attachment-19"
+                            },
+                            "552":{
+                                "time":552,
+                                "url":"test/sequences/sequence.552.jpg",
+                                "mimetype":"image/jpeg",
+                                "id":"attachment-20"
+                            },
+                            "615":{
+                                "time":615,
+                                "url":"test/sequences/sequence.615.jpg",
+                                "mimetype":"image/jpeg",
+                                "id":"attachment-21"
+                            },
+                            "629":{
+                                "time":629,
+                                "url":"test/sequences/sequence.629.jpg",
+                                "mimetype":"image/jpeg",
+                                "id":"attachment-22"
+                            },
+                            "643":{
+                                "time":643,
+                                "url":"test/sequences/sequence.643.jpg",
+                                "mimetype":"image/jpeg",
+                                "id":"attachment-23"
+                            },
+                            "689":{
+                                "time":689,
+                                "url":"test/sequences/sequence.689.jpg",
+                                "mimetype":"image/jpeg",
+                                "id":"attachment-24"
+                            },
+                            "965":{
+                                "time":965,
+                                "url":"test/sequences/sequence.965.jpg",
+                                "mimetype":"image/jpeg",
+                                "id":"25"
+                            }
+                        }
+                    };
+
+                    var matterhornData = new paella.matterhorn.MatterhornData(paella.player.config);
+                    var thisClass = this;
+                    thisClass.frameList = videoData.frames;
+                    thisClass.streams.push(videoData.master);
+                    if (videoData.slave) {
+                        thisClass.streams.push(videoData.slave);
+                    }
+
+                    matterhornData.loadVideoData(videoId,function(videoData) {
+                        thisClass.loadStatus = true;
+                        onSuccess();
+                    });
+                }
+            });
+
+
+        </script>
 	</head>
 	<body id="body" onload="loadPaella()">
 		<div id="paellaExtendedHeader">

@@ -37,24 +37,24 @@ paella.debug = {
 }
 
 paella.pluginList = [
-	'annotations.js',
+//	'annotations.js',
 	'framecontrol.js',
 	'fullscreenbutton.js',
 	'playbutton.js',
 	'repeatbutton.js',
-	'social.js',
+//	'social.js',
 	'viewmode.js',
-	'google-analitycs.js',
+//	'google-analitycs.js',
 //	'check_publish.js',
-	'description.js',
-	'serie_episodes.js',
-	'extended_profiles.js',
-	'search.js',
-	'usertracking.js',
-	'comments.js',
-	'recess.js',
-	'trimming.js',
-	'downloads.js'
+//	'description.js',
+//	'serie_episodes.js',
+//	'extended_profiles.js',
+//	'search.js',
+//	'usertracking.js',
+//	'comments.js',
+//	'recess.js',
+//	'trimming.js',
+//	'downloads.js'
 ];
 
 paella.events = {
@@ -2402,7 +2402,10 @@ paella.LoaderContainer = Class.create(DomNode,{
 		this.loader = this.addNode(new DomNode('div','',{position:'fixed',width:'128px',height:'128px',top:'50%',left:'50%',marginLeft:'-64px',marginTop:'-64px',backgroundImage:'url(resources/images/loader.png)'}));
 		var thisClass = this;
 		$(document).bind(paella.events.loadComplete,function(event,params) { thisClass.loadComplete(params); });
+
+        // progress indicator
 		this.timer = new paella.utils.Timer(function(timer) {
+            // todo works automatically independent of actual progress
 			thisClass.loaderPosition -= 128;
 			thisClass.loader.domElement.style.backgroundPosition = thisClass.loaderPosition + 'px';
 			timer.timeout = timer.timeout * 2;
@@ -2876,7 +2879,7 @@ paella.PlayerBase = Class.create({
 		else {
 			var errorMessage = paella.dictionary.translate("It seems that your browser is not HTML 5 compatible");
 			$(document).trigger(paella.events.error,{error:errorMessage});
-			var message = errorMessage + '<div style="display:block;width:470px;height:140px;margin-left:auto;margin-right:auto;font-family:Verdana,sans-sherif;font-size:12px;"><a href="http://www.google.es/chrome" style="color:#004488;float:left;margin-right:20px;"><img src="resources/images/chrome.png" style="width:80px;height:80px" alt="Google Chrome"></img><p>Google Chrome</p></a><a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home" style="color:#004488;float:left;margin-right:20px;"><img src="resources/images/explorer.png" style="width:80px;height:80px" alt="Internet Explorer 9"></img><p>Internet Explorer 9</p></a><a href="http://www.apple.com/safari/" style="float:left;margin-right:20px;color:#004488"><img src="resources/images/safari.png" style="width:80px;height:80px" alt="Safari"></img><p>Safari 5</p></a><a href="http://www.mozilla.org/firefox/" style="float:left;color:#004488"><img src="resources/images/firefox.png" style="width:80px;height:80px" alt="Firefox"></img><p>Firefox 12</p></a></div>';
+			var message = errorMessage + '<div style="display:block;width:470px;height:140px;margin-left:auto;margin-right:auto;font-family:Verdana,sans-sherif;font-size:12px;"><a href="http://www.google.es/chrome" style="color:#004488;float:left;margin-right:20px;"><img src="resources/images/chrome.png" style="width:80px;height:80px" alt="Google Chrome"/><p>Google Chrome</p></a><a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home" style="color:#004488;float:left;margin-right:20px;"><img src="resources/images/explorer.png" style="width:80px;height:80px" alt="Internet Explorer 9"></img><p>Internet Explorer 9</p></a><a href="http://www.apple.com/safari/" style="float:left;margin-right:20px;color:#004488"><img src="resources/images/safari.png" style="width:80px;height:80px" alt="Safari"></img><p>Safari 5</p></a><a href="http://www.mozilla.org/firefox/" style="float:left;color:#004488"><img src="resources/images/firefox.png" style="width:80px;height:80px" alt="Firefox"></img><p>Firefox 12</p></a></div>';
 			message += '<div style="margin-top:30px;"><a id="ignoreBrowserCheckLink" href="#" onclick="window.location = window.location + \'&ignoreBrowserCheck=true\'">' + paella.dictionary.translate("Continue anyway") + '</a></div>';
 			paella.messageBox.showError(message,{height:'40%'});
 		}
@@ -3076,6 +3079,7 @@ var PaellaPlayer = Class.create(paella.PlayerBase,{
 						// The loadComplete event depends on the readyState of presenter and slide video
 						new paella.utils.Timer(function(timer) {
 							if (thisClass.videoContainer.isReady()) {
+                                // hide load-progress indicator
 								$(document).trigger(paella.events.loadComplete,{masterVideo:master,slaveVideo:slave,frames:frames});
 								thisClass.onresize();
 								timer.repeat = false;
